@@ -43,7 +43,7 @@ public class Grok {
         Matcher m = regex.matcher(line);
         if (m.matches()) {
             for (String key : variables.keySet()) {
-                map.put(key, m.group(variables.get(key)));
+                map.put(variables.get(key), m.group(key));
             }
 
             return map;
@@ -80,7 +80,7 @@ public class Grok {
             String varname = m.group("KEYNAME");
             String namedGroup = incrementString();
             if (varname != null) {
-                variables.put(varname, namedGroup);
+                variables.put(namedGroup, varname);
             }
             String prefix = varname != null ? "(?<" + namedGroup + ">" : "";
             String suffix = varname != null ? ")" : "";

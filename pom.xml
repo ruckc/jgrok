@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.cruck</groupId>
   <artifactId>jgrok</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
   <name>jgrok</name>
   <url>http://github.com/ruckc/jgrok</url>
