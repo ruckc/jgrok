@@ -9,7 +9,7 @@ import org.junit.Test;
  * @author cruck
  */
 public class Grok2Test {
-    @Test
+    //@Test
     public void testIncrementString() {
         Assert.assertEquals("a", Grok.incrementString());
         Assert.assertEquals("b", Grok.incrementString());
@@ -43,5 +43,22 @@ public class Grok2Test {
         Assert.assertNotNull(map);
     }
     
-    
+    @Test
+    public void testSyslog1() {
+        Grok.storePattern("GREEDYDATA",".*");
+        Grok.storePattern("POSINT","\\d+");
+        Grok.storePattern("PROG","(?:[\\w._/%-]+)");
+        Grok.storePattern("SYSLOG_PROG","(?:%{PROG:syslog_program}(?:\\[%{POSINT:syslog_pid}\\]?)?)");
+        Grok.storePattern("HOSTNAME","[A-Za-z0-9\\-\\.]+");
+        Grok.storePattern("RSYSLOG_PLUS_ISO8601","\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.|,)\\d+(?:[\\+-]\\d{2}:?\\d{2})?");
+        Grok.storePattern("SYSLOG_DATE", "%{RSYSLOG_PLUS_ISO8601}");
+        Grok.storePattern("TEST1", "^<%{POSINT:syslog_pri}>%{SYSLOG_DATE:syslog_date} %{HOSTNAME:syslog_hostname} %{SYSLOG_PROG}:? %{GREEDYDATA:syslog_message}$");
+        String line = "<14>2013-10-11T00:00:01.750529+00:00 fuk-ge audispd: node=fuk-ge.unclass2.iesil type=USER_START msg=audit(1381449601.749:33603): user pid=32070 uid=0 auid=0 ses=412 subj=system_u:system_r:crond_t:s0-s0:c0.c1023 msg='op=PAM:session_open acct=\"root\" exe=\"/usr/sbin/crond\" hostname=? addr=? terminal=cron res=success'";
+        Grok g = Grok.compile("%{TEST1}");
+        System.out.println(g.getPattern());
+        Map<String, String> map = g.parse(line);
+        System.out.println(line+"\n"+map);
+        Assert.assertNotNull(map);
+        Assert.assertEquals(6, map.size());
+    }
 }
