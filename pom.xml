@@ -12,7 +12,9 @@
     
     <scm>
         <url>https://github.com/ruckc/jgrok.git</url>
-    </scm>
+        <connection>scm:git:ssh://git@github.com:ruckc/jgrok.git</connection>
+      <tag>jgrok-1.1.0</tag>
+  </scm>
     
     <build>
         <plugins>
@@ -24,6 +26,32 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -102,9 +130,23 @@
         </dependency>
     </dependencies>
     
+    <distributionManagement>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Staging Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    
     <profiles>
         <profile>
             <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -113,7 +155,7 @@
                         <version>1.5</version>
                         <executions>
                             <execution>
-                                <id>sign-artifacts</id>
+                                <id>sign</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
