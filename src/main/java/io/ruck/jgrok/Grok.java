@@ -1,4 +1,4 @@
-package org.cruck.jgrok;
+package io.ruck.jgrok;
 
 import java.io.File;
 import java.io.FileReader;

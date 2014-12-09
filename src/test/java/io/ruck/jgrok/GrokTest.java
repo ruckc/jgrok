@@ -1,4 +1,4 @@
-package org.cruck.jgrok;
+package io.ruck.jgrok;
 
 import java.util.Map;
 import org.junit.Assert;
