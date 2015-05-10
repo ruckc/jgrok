@@ -58,7 +58,7 @@ public class Grok {
     }
 
     private static Grok compile(String original, String grokpattern, Map<String, String> variables, Patterns patterns) {
-        log.log(Level.INFO, "compiling pattern {0} => {1}", new Object[]{original, grokpattern});
+        log.log(Level.INFO, "compiling pattern {} => {}", original, grokpattern);
         Matcher m = GROK_SUBSTITUTION.matcher(Pattern.quote(grokpattern));
         if (m.matches()) {
             String whole = m.group("WHOLE");
