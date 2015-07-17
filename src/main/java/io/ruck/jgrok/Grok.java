@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,8 +44,8 @@ public class Grok {
         Map<String, String> map = new TreeMap<>();
         Matcher m = regex.matcher(line);
         if (m.matches()) {
-            for (String key : variables.keySet()) {
-                map.put(variables.get(key), m.group(key));
+            for (Entry<String,String> e : variables.entrySet()) {
+                map.put(e.getValue(), m.group(e.getKey()));
             }
 
             return map;
