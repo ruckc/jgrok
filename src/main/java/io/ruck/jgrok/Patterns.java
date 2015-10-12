@@ -8,8 +8,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  *
@@ -17,17 +21,39 @@ import java.util.Map;
  */
 public class Patterns {
 
-    private final Map<String, String> patterns = new HashMap<>();
+    private final Map<String, Pattern> patternMap = new HashMap<>();
 
     public Patterns() {
     }
     
-    public void put(String key, String pattern) {
-        this.patterns.put(key, pattern);
+    public Pattern put(Pattern pattern) {
+        return this.patternMap.put(pattern.getKey(), pattern);
+    }
+    
+    public Pattern put(String key, String patternString) {
+        Pattern pattern = new Pattern(key,patternString);
+        this.patternMap.put(key, pattern);
+        return pattern;
+    }
+    
+    public Pattern getPattern(String key) {
+        return patternMap.get(key);
     }
 
     public String get(String key) {
-        return patterns.get(key);
+        Pattern pattern = patternMap.get(key);
+        if(pattern == null) {
+            throw new IllegalArgumentException(key+" does not have a grok pattern");
+        }
+        return pattern.getPattern();
+    }
+    
+    public void remove(String key) {
+        patternMap.remove(key);
+    }
+    
+    public void remove(Pattern pattern) {
+        patternMap.remove(pattern.getKey());
     }
 
     public static Patterns load(InputStream is) throws IOException {
@@ -36,7 +62,7 @@ public class Patterns {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] pattern = line.split(" ",2);
-                patterns.patterns.put(pattern[0], pattern[1]);
+                patterns.put(pattern[0], pattern[1]);
             }
         }
         return patterns;

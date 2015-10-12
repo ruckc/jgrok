@@ -1,7 +1,13 @@
 package io.ruck.jgrok;
 
+import java.util.HashSet;
 import java.util.Map;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -57,12 +63,35 @@ public class GrokTest {
 
     @Test
     public void testCompile4() {
+        HashSet<Pattern> patternSet = new HashSet<>();
         Patterns patterns = new Patterns();
+        Pattern p = patterns.put("MISSING", ".*");
+        Pattern p2 = patterns.getPattern("MISSING");
+        Pattern p3 = patterns.put("MISSING", ".*");
+        patternSet.add(p);
+        patternSet.add(p2);
+        patternSet.add(p3);
+        assertEquals(1, patternSet.size());
+        assertEquals(p, p2);
+        assertTrue(p == p2);
+        assertEquals(p, p3);
+        assertFalse(p == p3);
+        assertNotNull(patterns.get("MISSING"));
+        patterns.remove("MISSING");
+        try {
+            patterns.get("MISSING");
+            fail(); // not reachable
+        } catch (IllegalArgumentException e) {
+            // expected exception
+        }
+        patterns.put(p);
+        assertNotNull(patterns.get("MISSING"));
+        patterns.remove(p);
         try {
             Grok.compile("%{MISSING}", patterns);
+            fail(); // not reachable
         } catch (IllegalArgumentException e) {
-            return;
+            // expected
         }
-        Assert.fail();
     }
 }
