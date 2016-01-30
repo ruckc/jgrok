@@ -17,6 +17,16 @@
         </license>
     </licenses>
     
+    <developers>
+        <developer>
+            <id>jgrok</id>
+            <email>jgrok@ruck.io</email>
+            <name>Curtis W. Ruck</name>
+            <organization>ruck.io</organization>
+            <timezone>EST5EDT</timezone>
+        </developer>
+    </developers>
+    
     <organization>
         <name>Curtis W. Ruck</name>
         <url>https://github.com/ruckc</url>
