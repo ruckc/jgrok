@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ruck</groupId>
     <artifactId>jgrok</artifactId>
-    <version>2.1.8-SNAPSHOT</version>
+    <version>2.1.8</version>
     <packaging>jar</packaging>
     
     <name>jgrok</name>
@@ -36,7 +36,7 @@
         <url>scm:git:git@github.com:ruckc/jgrok.git</url>
         <connection>scm:git:git@github.com:ruckc/jgrok.git</connection>
         <developerConnection>scm:git:git@github.com:ruckc/jgrok.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>jgrok-2.1.8</tag>
     </scm>
 
     <build>
