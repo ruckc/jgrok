@@ -161,9 +161,9 @@
 
     <distributionManagement>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Staging Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>bintray-ruckc-maven</id>
+            <name>ruckc-maven</name>
+            <url>https://api.bintray.com/maven/ruckc/maven/jgrok/;publish=1</url>
         </repository>
     </distributionManagement>
 
