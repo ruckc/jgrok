@@ -9,6 +9,18 @@
     <name>jgrok</name>
     <description>JGrok is a pure java subset of implementation of Grok from https://github.com/jordansissel/grok</description>
     <url>https://github.com/ruckc/jgrok</url>
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>apache-2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    
+    <organization>
+        <name>Curtis W. Ruck</name>
+        <url>https://github.com/ruckc</url>
+    </organization>
     
     <scm>
         <url>scm:git:git@github.com:ruckc/jgrok.git</url>
