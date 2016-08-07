@@ -32,11 +32,12 @@ import org.apache.logging.log4j.Logger;
  * @author cruck
  */
 public class Grok {
+
     // (?<PATTERN>[A-Z]+)(?:\\:(?<VARNAME>[a-z_]+))?
     private static final Pattern GROK_SUBSTITUTION = Pattern.compile(".*?(?<WHOLE>%\\{(?<PATTERNNAME>[A-Z0-9_]+)(?::(?<KEYNAME>[a-z0-9_]+))?\\}).*", Pattern.MULTILINE & Pattern.DOTALL);
     private static final Logger log = LogManager.getLogger();
     private static String lastString = ((char) ('a' - 1)) + "";
-    
+
     private final String original;
     private final Pattern regex;
     private final Map<String, String> variables;
@@ -56,12 +57,12 @@ public class Grok {
     }
 
     public Map<String, String> parse(String line) {
-        Map<String, String> map = new TreeMap<>();
+        Map<String, String> map = new HashMap<>();
         Matcher m = regex.matcher(line);
         if (m.matches()) {
-            for (Entry<String,String> e : variables.entrySet()) {
+            variables.entrySet().stream().forEach((e) -> {
                 map.put(e.getValue(), m.group(e.getKey()));
-            }
+            });
 
             return map;
         }
