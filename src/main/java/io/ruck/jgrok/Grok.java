@@ -19,8 +19,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.Level;
@@ -75,7 +73,7 @@ public class Grok {
     }
 
     private static Grok compile(String original, String grokpattern, Map<String, String> variables, Patterns patterns) {
-        log.log(Level.INFO, "compiling pattern {} => {}", original, grokpattern);
+        log.log(Level.DEBUG, "compiling pattern {} => {}", original, grokpattern);
         Matcher m = GROK_SUBSTITUTION.matcher(Pattern.quote(grokpattern));
         if (m.matches()) {
             String whole = m.group("WHOLE");

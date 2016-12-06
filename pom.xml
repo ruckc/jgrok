@@ -22,6 +22,7 @@
             <id>jgrok</id>
             <email>jgrok@ruck.io</email>
             <name>Curtis W. Ruck</name>
+            <url>https://github.com/ruckc</url>
             <organization>ruck.io</organization>
             <timezone>EST5EDT</timezone>
         </developer>
@@ -34,7 +35,7 @@
     
     <scm>
         <url>scm:git:git@github.com:ruckc/jgrok.git</url>
-        <connection>scm:git:git@github.com:ruckc/jgrok.git</connection>
+        <connection>scm:git:git://github.com:ruckc/jgrok.git</connection>
         <developerConnection>scm:git:git@github.com:ruckc/jgrok.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
